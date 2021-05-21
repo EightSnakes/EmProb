@@ -13,17 +13,26 @@ public class MenuInter extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         Salir = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        supervisores = new javax.swing.JButton();
+        problemasmenu = new javax.swing.JButton();
+        tiendasmenu = new javax.swing.JButton();
         fondo2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setText("jButton1");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 230, 200, 100));
+        jButton1.setFont(new java.awt.Font("Rockwell", 1, 24)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/imagenreportes.jpg"))); // NOI18N
+        jButton1.setText("REPORTES");
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 230, 250, 100));
 
         Salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Salida.png"))); // NOI18N
         Salir.setBorderPainted(false);
@@ -35,14 +44,23 @@ public class MenuInter extends javax.swing.JFrame {
         });
         getContentPane().add(Salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 470, 80, 70));
 
-        jButton2.setText("jButton2");
-        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 230, 200, 100));
+        supervisores.setFont(new java.awt.Font("Rockwell", 1, 24)); // NOI18N
+        supervisores.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/supervisormeniimagen_opt.jpg"))); // NOI18N
+        supervisores.setText("SUPERVISOR");
+        supervisores.setContentAreaFilled(false);
+        getContentPane().add(supervisores, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 230, 240, 100));
 
-        jButton3.setText("jButton3");
-        getContentPane().add(jButton3, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 360, 200, 100));
+        problemasmenu.setFont(new java.awt.Font("Rockwell", 1, 24)); // NOI18N
+        problemasmenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/problemasimagen_opt.png"))); // NOI18N
+        problemasmenu.setText("PROBLEMAS");
+        problemasmenu.setContentAreaFilled(false);
+        getContentPane().add(problemasmenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(737, 350, -1, 100));
 
-        jButton4.setText("jButton4");
-        getContentPane().add(jButton4, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 360, 200, 100));
+        tiendasmenu.setFont(new java.awt.Font("Rockwell", 1, 24)); // NOI18N
+        tiendasmenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/tiendasicon_opt.png"))); // NOI18N
+        tiendasmenu.setText("TIENDAS");
+        tiendasmenu.setContentAreaFilled(false);
+        getContentPane().add(tiendasmenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 350, 240, 100));
 
         fondo2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondo.png"))); // NOI18N
         getContentPane().add(fondo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -54,45 +72,19 @@ public class MenuInter extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_SalirActionPerformed
 
-    
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuInter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuInter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuInter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuInter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MenuInter().setVisible(true);
-            }
-        });
-    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Salir;
     private javax.swing.JLabel fondo2;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton problemasmenu;
+    private javax.swing.JButton supervisores;
+    private javax.swing.JButton tiendasmenu;
     // End of variables declaration//GEN-END:variables
 }
