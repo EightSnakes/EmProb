@@ -10,18 +10,18 @@ import java.sql.*;
  * @author Snake
  */
 public class Conexion {
-    Statement stmt = null;
-    Connection conect = null;
-    public static Connection sql;
-    public static Connection conectar(){
+    public static Connection getConexion(){
+        String conexionUrl = "jdbc:sqlserver://localhost:1433;"
+                + "database= EmProb;"
+                + "user=sa;"
+                + "password=RPSsql12345;"
+                + "loginTimeout=30;";
         try{
-            String connectionUrl = "jdbc:sqlserver://localhost:1433;database=BDSI;user=sa; password = 123";
-            sql = DriverManager.getConnection(connectionUrl);
-            System.out.print("Conectado.");
+            Connection con = DriverManager.getConnection(conexionUrl);
+            return con;
+        }catch(SQLException ex){
+            System.out.println(ex.toString());
+            return null;
         }
-        catch(SQLException ex){
-            System.out.println("Error " + ex);
-        }
-        return sql;
     }
 }
