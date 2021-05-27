@@ -41,34 +41,43 @@ public class menu2 extends javax.swing.JFrame {
 
         agregarboton.setBackground(new java.awt.Color(255, 255, 255));
         agregarboton.setFont(new java.awt.Font("HP Simplified", 1, 24)); // NOI18N
+        agregarboton.setForeground(new java.awt.Color(255, 255, 255));
         agregarboton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/agregaricon.jpg"))); // NOI18N
-        agregarboton.setText("AGREGAR");
+        agregarboton.setText("Agregar");
         agregarboton.setBorderPainted(false);
+        agregarboton.setContentAreaFilled(false);
+        agregarboton.setDefaultCapable(false);
         agregarboton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 agregarbotonActionPerformed(evt);
             }
         });
-        getContentPane().add(agregarboton, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 120, 330, 170));
+        getContentPane().add(agregarboton, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 130, 320, 160));
 
         modificarboton.setFont(new java.awt.Font("HP Simplified", 1, 24)); // NOI18N
         modificarboton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/modificaricon (1).jpg"))); // NOI18N
-        modificarboton.setText("MODIFICAR");
+        modificarboton.setText("Modificar");
+        modificarboton.setBorderPainted(false);
+        modificarboton.setContentAreaFilled(false);
         getContentPane().add(modificarboton, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 120, 330, 170));
 
         consultarboton.setFont(new java.awt.Font("HP Simplified", 1, 24)); // NOI18N
         consultarboton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/consultar icon (1)_1.jpg"))); // NOI18N
-        consultarboton.setText("CONSULTAR");
+        consultarboton.setText("Consultar");
+        consultarboton.setBorderPainted(false);
+        consultarboton.setContentAreaFilled(false);
         consultarboton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 consultarbotonActionPerformed(evt);
             }
         });
-        getContentPane().add(consultarboton, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 380, 310, 170));
+        getContentPane().add(consultarboton, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 370, 310, 180));
 
         eliminarboton.setFont(new java.awt.Font("HP Simplified", 1, 24)); // NOI18N
         eliminarboton.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/eliminaricon (1).jpg"))); // NOI18N
-        eliminarboton.setText("ELIMINAR");
+        eliminarboton.setText("Eliminar");
+        eliminarboton.setBorderPainted(false);
+        eliminarboton.setContentAreaFilled(false);
         eliminarboton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 eliminarbotonActionPerformed(evt);
@@ -79,6 +88,11 @@ public class menu2 extends javax.swing.JFrame {
         salirmenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Salida2.png"))); // NOI18N
         salirmenu2.setBorderPainted(false);
         salirmenu2.setContentAreaFilled(false);
+        salirmenu2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salirmenu2ActionPerformed(evt);
+            }
+        });
         getContentPane().add(salirmenu2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 180, 140));
 
         fondo2menu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondomenu2.jpg"))); // NOI18N
@@ -98,6 +112,16 @@ public class menu2 extends javax.swing.JFrame {
     private void eliminarbotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarbotonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_eliminarbotonActionPerformed
+
+    private void salirmenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirmenu2ActionPerformed
+        // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MenuInter().setVisible(true);
+            }
+        });
+            this.dispose();
+    }//GEN-LAST:event_salirmenu2ActionPerformed
 
     /**
      * @param args the command line arguments

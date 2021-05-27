@@ -20,6 +20,7 @@ public class InicioSesion extends javax.swing.JFrame {
      */
     public InicioSesion() {
         initComponents();
+        this.setLocationRelativeTo(null);
         try{
             Statement sql = Conexion.getConexion().createStatement();
             System.out.println("Conectado");
@@ -130,9 +131,14 @@ public class InicioSesion extends javax.swing.JFrame {
         nombre = jTextField2.getText();
         contra = new String(jPasswordField1.getPassword());
         if(acceso(nombre, contra)){
-            System.out.println("Existe");
+            java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new MenuInter().setVisible(true);
+            }
+        });
+            this.dispose();
         } else {
-            System.out.println("No existe");
+            JOptionPane.showMessageDialog(null, "Usuario incorrecto");
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 

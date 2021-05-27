@@ -13,8 +13,8 @@ public class Conexion {
     public static Connection getConexion(){
         String conexionUrl = "jdbc:sqlserver://localhost:1433;"
                 + "database= EmProb;"
-                + "user=sa;"
-                + "password=RPSsql12345;"
+                + "user=Master;"
+                + "password=master12345;"
                 + "loginTimeout=30;";
         try{
             Connection con = DriverManager.getConnection(conexionUrl);
