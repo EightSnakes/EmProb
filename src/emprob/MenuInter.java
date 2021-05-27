@@ -103,7 +103,7 @@ public class MenuInter extends javax.swing.JFrame {
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new menu2().setVisible(true);
+                new menu2Reportes().setVisible(true);
             }
         });
             this.dispose();
@@ -113,7 +113,7 @@ public class MenuInter extends javax.swing.JFrame {
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new menu2().setVisible(true);
+                new menu2Tiendas().setVisible(true);
             }
         });
             this.dispose();
@@ -123,7 +123,7 @@ public class MenuInter extends javax.swing.JFrame {
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new menu2().setVisible(true);
+                new menu2Encargados().setVisible(true);
             }
         });
             this.dispose();
@@ -133,7 +133,7 @@ public class MenuInter extends javax.swing.JFrame {
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new menu2().setVisible(true);
+                new menu2Problemas().setVisible(true);
             }
         });
             this.dispose();
