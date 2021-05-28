@@ -5,12 +5,24 @@
  */
 package emprob;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import manejoBD.Conexion;
+
 /**
  *
  * @author LuisMa
  */
 public class submenu extends javax.swing.JFrame {
 
+    private int idT;
+    private int idE;
+    private String data[] = new String[6];
+    
     /**
      * Creates new form submenu
      */
@@ -48,7 +60,6 @@ public class submenu extends javax.swing.JFrame {
         Colonia = new javax.swing.JTextField();
         Municipio = new javax.swing.JTextField();
         Estado = new javax.swing.JTextField();
-        salir = new javax.swing.JButton();
         Back = new javax.swing.JButton();
         save = new javax.swing.JButton();
         menusub = new javax.swing.JLabel();
@@ -156,6 +167,12 @@ public class submenu extends javax.swing.JFrame {
         TextoEstado.setToolTipText("");
         TextoEstado.setBorder(null);
         getContentPane().add(TextoEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, 40, 20));
+
+        ID_Tienda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ID_TiendaActionPerformed(evt);
+            }
+        });
         getContentPane().add(ID_Tienda, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 190, -1));
         getContentPane().add(ID_Encargado, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 190, -1));
         getContentPane().add(Telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 190, -1));
@@ -165,19 +182,24 @@ public class submenu extends javax.swing.JFrame {
         getContentPane().add(Municipio, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, 190, -1));
         getContentPane().add(Estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 360, 190, -1));
 
-        salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Salida.png"))); // NOI18N
-        salir.setBorderPainted(false);
-        salir.setContentAreaFilled(false);
-        getContentPane().add(salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 400, 50, 50));
-
         Back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Regreso.png"))); // NOI18N
         Back.setBorderPainted(false);
         Back.setContentAreaFilled(false);
-        getContentPane().add(Back, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 400, 50, 50));
+        Back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BackActionPerformed(evt);
+            }
+        });
+        getContentPane().add(Back, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 400, 50, 50));
 
         save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Guardar.png"))); // NOI18N
         save.setBorderPainted(false);
         save.setContentAreaFilled(false);
+        save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveActionPerformed(evt);
+            }
+        });
         getContentPane().add(save, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 400, 50, 50));
 
         menusub.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondoSUB_opt.jpg"))); // NOI18N
@@ -206,40 +228,65 @@ public class submenu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TextoTelefonoActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(submenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(submenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(submenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(submenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
+    private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
+        // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new submenu().setVisible(true);
+                new menu2Tiendas().setVisible(true);
             }
         });
-    }
+        this.dispose();
+    }//GEN-LAST:event_BackActionPerformed
+
+    private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
+        // TODO add your handling code here:
+        try{
+            idT = Integer.parseInt(ID_Tienda.getText());
+            idE = Integer.parseInt(ID_Encargado.getText());
+            data[0] = Telefono.getText();
+            data[1] = Calle.getText();
+            data[2] = NumCalle.getText();
+            data[3] = Colonia.getText();
+            data[4] = Municipio.getText();
+            data[5] = Estado.getText();
+            
+            
+        }catch(NumberFormatException  ex){
+            JOptionPane.showMessageDialog(null, "Ingrese valores numéricos en los id");
+        }
+        
+        if (existeClaveT(idT)){
+            JOptionPane.showMessageDialog(null, "El idTienda ya está registrado, intente con otro.");
+        } else if (!existeClaveE(idE)){
+            JOptionPane.showMessageDialog(null, "El idEncargado es inexistente, ingrese un id registrado.");
+        } else {
+            
+            try {
+                Statement sql = Conexion.getConexion().createStatement();
+                sql.executeUpdate("INSERT INTO Tiendas VALUES ("
+                + idT + ", " + idE + ", '" + data[0] + "', '" + data[1] + "', '" + data[2] + "', '" + data[3] + "', '" + data[4] + "', '" + data[5] + "');");
+                JOptionPane.showMessageDialog(null, "Datos guardados con éxito.");
+                Calle.setText(null);
+                Colonia.setText(null);
+                Estado.setText(null);
+                ID_Encargado.setText(null);
+                ID_Tienda.setText(null);
+                Municipio.setText(null);
+                NumCalle.setText(null);
+                Telefono.setText(null);
+            } catch (SQLException ex){
+                JOptionPane.showMessageDialog(null, ex.toString());
+            }
+            
+        }
+        
+    }//GEN-LAST:event_saveActionPerformed
+
+    private void ID_TiendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ID_TiendaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ID_TiendaActionPerformed
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
@@ -263,8 +310,82 @@ public class submenu extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel menusub;
-    private javax.swing.JButton salir;
     private javax.swing.JButton save;
     private javax.swing.JTextField subtituloTiendas;
     // End of variables declaration//GEN-END:variables
+
+    private boolean existeClaveT(int idT){
+        boolean existe = false;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Conexion conect = new Conexion();
+        Connection con = conect.getConexion();
+        String consulta = "SELECT ID_Tienda FROM Tiendas WHERE ID_Tienda = ?";
+        try {
+            ps = con.prepareStatement(consulta);
+            ps.setInt(1, idT);
+            rs = ps.executeQuery();
+            
+            if(rs.next()){
+                existe = true;
+            }
+            
+        } catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, ex.toString());
+            existe = false;
+        }
+        return existe;
+    }
+    
+    private boolean existeClaveE(int idE){
+        boolean existe = false;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Conexion conect = new Conexion();
+        Connection con = conect.getConexion();
+        String consulta = "SELECT ID_Encargado FROM Encargados WHERE ID_Encargado = ?";
+        try {
+            ps = con.prepareStatement(consulta);
+            ps.setInt(1, idE);
+            rs = ps.executeQuery();
+            
+            if(rs.next()){
+                existe = true;
+            }
+            
+        } catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, ex.toString());
+            existe = false;
+        }
+        return existe;
+    }
+    
+    //Método no terminado para las query
+    /*private boolean guardar(){
+        boolean guardado = false;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Conexion conect = new Conexion();
+        Connection con = conect.getConexion();
+        String ins = "INSERT INTO Tiendas VALUES ("
+                + idT + ", " + idE + ", '" + data[0] + "', '" + data[1] + "', '" + data[2] + "', '" + data[3] + "', '" + data[4] + "', '" + data[5] + "')";
+        try {
+            ps = con.prepareStatement(ins);
+            ps.setInt(1, idE);
+            rs = ps.executeQuery();
+            
+            if(rs.next()){
+                guardado = true;
+            }
+            
+        } catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, ex.toString());
+            guardado = false;
+        }
+
+        
+        return guardado;
+    }
+    
+    */
 }

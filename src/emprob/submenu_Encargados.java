@@ -5,12 +5,25 @@
  */
 package emprob;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import manejoBD.Conexion;
+
 /**
  *
  * @author LuisMa
  */
 public class submenu_Encargados extends javax.swing.JFrame {
 
+    
+    private int idE;
+    private String nombre;
+    private String tel;
+    
     /**
      * Creates new form submenu_Encargados
      */
@@ -35,7 +48,6 @@ public class submenu_Encargados extends javax.swing.JFrame {
         TextoCelularE = new javax.swing.JTextField();
         ID_Encargado = new javax.swing.JTextField();
         NombreEncar = new javax.swing.JTextField();
-        salir = new javax.swing.JButton();
         Telefono_E = new javax.swing.JTextField();
         back = new javax.swing.JButton();
         save = new javax.swing.JButton();
@@ -90,22 +102,27 @@ public class submenu_Encargados extends javax.swing.JFrame {
         getContentPane().add(TextoCelularE, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 280, 100, -1));
         getContentPane().add(ID_Encargado, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 160, 190, -1));
         getContentPane().add(NombreEncar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 220, 190, -1));
-
-        salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Salida.png"))); // NOI18N
-        salir.setBorderPainted(false);
-        salir.setContentAreaFilled(false);
-        getContentPane().add(salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 350, 50, 50));
         getContentPane().add(Telefono_E, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 280, 190, -1));
 
         back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Regreso.png"))); // NOI18N
         back.setBorderPainted(false);
         back.setContentAreaFilled(false);
-        getContentPane().add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 350, 50, 50));
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
+        getContentPane().add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 350, 50, 50));
 
         save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Guardar.png"))); // NOI18N
         save.setBorderPainted(false);
         save.setContentAreaFilled(false);
-        getContentPane().add(save, new org.netbeans.lib.awtextra.AbsoluteConstraints(273, 350, 60, 50));
+        save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveActionPerformed(evt);
+            }
+        });
+        getContentPane().add(save, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 350, 60, 50));
 
         menuEncargados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondoSUB_opt.jpg"))); // NOI18N
         getContentPane().add(menuEncargados, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -126,16 +143,44 @@ public class submenu_Encargados extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TextoNombreActionPerformed
 
-    
-    public static void main(String args[]) {
-       
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new submenu_Encargados().setVisible(true);
+                new menu2Encargados().setVisible(true);
             }
         });
-    }
+        this.dispose();
+    }//GEN-LAST:event_backActionPerformed
 
+    private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
+        // TODO add your handling code here:
+        try{
+            idE = Integer.parseInt(ID_Encargado.getText());
+            nombre = NombreEncar.getText();
+            tel = Telefono_E.getText();
+        }catch(NumberFormatException  ex){
+            JOptionPane.showMessageDialog(null, "Ingrese valores numéricos en los id");
+        }
+        
+        if(existeClaveE()){
+            JOptionPane.showMessageDialog(null, "El idEncargado ya está registrado, intente con otro.");
+        } else {
+            try {
+                Statement sql = Conexion.getConexion().createStatement();
+                sql.executeUpdate("INSERT INTO Encargados VALUES (" + idE + ", '" + nombre + "', '" + tel + "')");
+                JOptionPane.showMessageDialog(null, "Datos guardados con éxito.");
+                ID_Encargado.setText(null);
+                NombreEncar.setText(null);
+                Telefono_E.setText(null);
+            } catch (SQLException ex){
+                JOptionPane.showMessageDialog(null, ex.toString());
+            }
+        }
+    }//GEN-LAST:event_saveActionPerformed
+
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ID_Encargado;
     private javax.swing.JTextField NombreEncar;
@@ -146,8 +191,31 @@ public class submenu_Encargados extends javax.swing.JFrame {
     private javax.swing.JTextField TituloEncargados;
     private javax.swing.JButton back;
     private javax.swing.JLabel menuEncargados;
-    private javax.swing.JButton salir;
     private javax.swing.JButton save;
     private javax.swing.JTextField subtituloEncargado;
     // End of variables declaration//GEN-END:variables
+
+    private boolean existeClaveE(){
+        boolean existe = false;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Conexion conect = new Conexion();
+        Connection con = conect.getConexion();
+        String consulta = "SELECT ID_Encargado FROM Encargados WHERE ID_Encargado = ?";
+        try {
+            ps = con.prepareStatement(consulta);
+            ps.setInt(1, idE);
+            rs = ps.executeQuery();
+            
+            if(rs.next()){
+                existe = true;
+            }
+            
+        } catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, ex.toString());
+            existe = false;
+        }
+        return existe;
+    }
+    
 }
