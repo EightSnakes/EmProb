@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package emprob;
+package eliminacionModificacion;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,19 +12,20 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import manejoBD.Conexion;
+import emprob.*;
 
 /**
  *
  * @author LuisMa
  */
-public class consultarProblemas extends javax.swing.JFrame {
+public class eliminarProblemas extends javax.swing.JFrame {
 
     /**
      * Creates new form submenu_Problemas
      */
     int iDP;
     String nombre, desc, solu;
-    public consultarProblemas() {
+    public eliminarProblemas() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -115,7 +116,7 @@ public class consultarProblemas extends javax.swing.JFrame {
         });
         getContentPane().add(back1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 50, 50));
 
-        save1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Buscar.png"))); // NOI18N
+        save1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Borrar.png"))); // NOI18N
         save1.setBorderPainted(false);
         save1.setContentAreaFilled(false);
         save1.addActionListener(new java.awt.event.ActionListener() {
@@ -165,14 +166,40 @@ public class consultarProblemas extends javax.swing.JFrame {
                 NombreProblema.setText(nombre);
                 Descripcion.setText(desc);
                 Solucion.setText(solu);
-                
+                if(existeClavePER()){
+                    JOptionPane.showMessageDialog(null, "Este registro esta ligado a otros registros, no se puede eliminar");
+                }
+        else{
+            int des = JOptionPane.showConfirmDialog(null, "¿Estas seguro de querer borrar este registro?", "Confirmación", JOptionPane.YES_NO_OPTION);
+            if(des==0){
+                try {
+                int d = sql.executeUpdate("DELETE FROM Problema where ID_Problema = " + iDP);
+                JOptionPane.showMessageDialog(null, "Registro eliminado con exito");
+                NombreProblema.setText(null);
+                Descripcion.setText(null);
+                Solucion.setText(null);
+                IDProblema.setText(null);
+                sql.close();
+            } catch (SQLException ex){
+                JOptionPane.showMessageDialog(null, ex.toString());
+            }
+            }
+            else{
+                NombreProblema.setText(null);
+                Descripcion.setText(null);
+                Solucion.setText(null);
+                IDProblema.setText(null);
+            }
+        }
             } catch (SQLException ex){
                 JOptionPane.showMessageDialog(null, ex.toString());
             }
         }
         else{
-            JOptionPane.showMessageDialog(null, "La tienda con el Id ingresado no existe");
+            JOptionPane.showMessageDialog(null, "El problema con el Id ingresado no existe");
         }
+        
+        
     }//GEN-LAST:event_save1ActionPerformed
 
 
@@ -206,6 +233,28 @@ public class consultarProblemas extends javax.swing.JFrame {
             
             if(rs.next()){
                existe = true;
+            }
+            
+        } catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, ex.toString());
+            existe = false;
+        }
+        return existe;
+    }
+    private boolean existeClavePER(){
+        boolean existe = false;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Conexion conect = new Conexion();
+        Connection con = conect.getConexion();
+        String consulta = "SELECT ID_Problema FROM EncabezadosReportes WHERE ID_Problema = ?";
+        try {
+            ps = con.prepareStatement(consulta);
+            ps.setInt(1, iDP);
+            rs = ps.executeQuery();
+            
+            if(rs.next()){
+                existe = true;
             }
             
         } catch (SQLException ex){

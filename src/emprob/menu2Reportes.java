@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package emprob;
-
+import eliminacionModificacion.*;
 /**
  *
  * @author LuisMa
@@ -60,6 +60,11 @@ public class menu2Reportes extends javax.swing.JFrame {
         modificarboton.setText("Modificar");
         modificarboton.setBorderPainted(false);
         modificarboton.setContentAreaFilled(false);
+        modificarboton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarbotonActionPerformed(evt);
+            }
+        });
         getContentPane().add(modificarboton, new org.netbeans.lib.awtextra.AbsoluteConstraints(780, 120, 330, 170));
 
         consultarboton.setFont(new java.awt.Font("HP Simplified", 1, 24)); // NOI18N
@@ -129,6 +134,12 @@ public class menu2Reportes extends javax.swing.JFrame {
 
     private void eliminarbotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarbotonActionPerformed
         // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new eliminarReportes().setVisible(true);
+            }
+        });
+            this.dispose();
     }//GEN-LAST:event_eliminarbotonActionPerformed
 
     private void salirmenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirmenu2ActionPerformed
@@ -140,6 +151,16 @@ public class menu2Reportes extends javax.swing.JFrame {
         });
             this.dispose();
     }//GEN-LAST:event_salirmenu2ActionPerformed
+
+    private void modificarbotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarbotonActionPerformed
+        // TODO add your handling code here:
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new modificarReportes().setVisible(true);
+            }
+        });
+            this.dispose();
+    }//GEN-LAST:event_modificarbotonActionPerformed
 
     /**
      * @param args the command line arguments

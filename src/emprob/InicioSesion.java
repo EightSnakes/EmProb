@@ -21,12 +21,6 @@ public class InicioSesion extends javax.swing.JFrame {
     public InicioSesion() {
         initComponents();
         this.setLocationRelativeTo(null);
-        try{
-            Statement sql = Conexion.getConexion().createStatement();
-            System.out.println("Conectado");
-        } catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, ex.toString());
-        }
     }
     
     String nombre;

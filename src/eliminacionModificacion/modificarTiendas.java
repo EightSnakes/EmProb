@@ -1,9 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package emprob;
+
+package eliminacionModificacion;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,21 +8,15 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import manejoBD.Conexion;
+import emprob.*;
 
-/**
- *
- * @author LuisMa
- */
-public class submenu extends javax.swing.JFrame {
 
-    private int idT;
-    private int idE;
-    private String data[] = new String[6];
+public class modificarTiendas extends javax.swing.JFrame {
+
+    int idT, idE, numCa;
+    String tel, calle, col, muni, est, ide, numca;
     
-    /**
-     * Creates new form submenu
-     */
-    public submenu() {
+    public modificarTiendas() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -166,14 +156,28 @@ public class submenu extends javax.swing.JFrame {
         TextoEstado.setText("Estado:");
         TextoEstado.setToolTipText("");
         TextoEstado.setBorder(null);
-        getContentPane().add(TextoEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, 40, 20));
+        getContentPane().add(TextoEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, 50, 20));
         getContentPane().add(ID_Tienda, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 190, -1));
+
+        ID_Encargado.setEditable(false);
         getContentPane().add(ID_Encargado, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 190, -1));
+
+        Telefono.setEditable(false);
         getContentPane().add(Telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 190, -1));
+
+        Calle.setEditable(false);
         getContentPane().add(Calle, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 240, 190, -1));
+
+        NumCalle.setEditable(false);
         getContentPane().add(NumCalle, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 270, 190, -1));
+
+        Colonia.setEditable(false);
         getContentPane().add(Colonia, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 300, 190, -1));
+
+        Municipio.setEditable(false);
         getContentPane().add(Municipio, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 330, 190, -1));
+
+        Estado.setEditable(false);
         getContentPane().add(Estado, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 360, 190, -1));
 
         Back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Regreso.png"))); // NOI18N
@@ -184,9 +188,9 @@ public class submenu extends javax.swing.JFrame {
                 BackActionPerformed(evt);
             }
         });
-        getContentPane().add(Back, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 410, 50, 50));
+        getContentPane().add(Back, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 50, 50));
 
-        save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Guardar.png"))); // NOI18N
+        save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Buscar.png"))); // NOI18N
         save.setBorderPainted(false);
         save.setContentAreaFilled(false);
         save.addActionListener(new java.awt.event.ActionListener() {
@@ -194,7 +198,7 @@ public class submenu extends javax.swing.JFrame {
                 saveActionPerformed(evt);
             }
         });
-        getContentPane().add(save, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 400, 50, 50));
+        getContentPane().add(save, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, 50, 50));
 
         menusub.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondoSUB_opt.jpg"))); // NOI18N
         getContentPane().add(menusub, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -229,64 +233,52 @@ public class submenu extends javax.swing.JFrame {
                 new menu2Tiendas().setVisible(true);
             }
         });
-        this.dispose();
+            this.dispose();
     }//GEN-LAST:event_BackActionPerformed
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
         // TODO add your handling code here:
-        if(ID_Tienda.getText().equals("")||ID_Encargado.getText().equals("")){
-            JOptionPane.showMessageDialog(null, "Tiene que ingresar el ID del encargado y el ID del problema");
-        }
-        else{
-            try{
+        try{
             idT = Integer.parseInt(ID_Tienda.getText());
-            idE = Integer.parseInt(ID_Encargado.getText());
-            data[0] = Telefono.getText();
-            data[1] = Calle.getText();
-            data[2] = NumCalle.getText();
-            data[3] = Colonia.getText();
-            data[4] = Municipio.getText();
-            data[5] = Estado.getText();
-            
-            
         }catch(NumberFormatException  ex){
             JOptionPane.showMessageDialog(null, "Ingrese valores numéricos en los id");
         }
-        
-        if (existeClaveT(idT)){
-            JOptionPane.showMessageDialog(null, "El idTienda ya está registrado, intente con otro.");
-        } else if (!existeClaveE(idE)){
-            JOptionPane.showMessageDialog(null, "El idEncargado es inexistente, ingrese un id registrado.");
-        } else {
-            
+        if(existeClaveT(idT)){
             try {
                 Statement sql = Conexion.getConexion().createStatement();
-                sql.executeUpdate("INSERT INTO Tiendas VALUES ("
-                + idT + ", " + idE + ", '" + data[0] + "', '" + data[1] + "', '" + data[2] + "', '" + data[3] + "', '" + data[4] + "', '" + data[5] + "');");
-                JOptionPane.showMessageDialog(null, "Datos guardados con éxito.");
-                Calle.setText(null);
-                Colonia.setText(null);
-                Estado.setText(null);
-                ID_Encargado.setText(null);
-                ID_Tienda.setText(null);
-                Municipio.setText(null);
-                NumCalle.setText(null);
-                Telefono.setText(null);
+                ResultSet rs;
+                rs= sql.executeQuery("SELECT * FROM Tiendas where ID_Tienda = " + idT);
+                while(rs.next()){
+                    idE = rs.getInt("ID_Encargado");
+                    numCa = rs.getInt("Numero_Calle");
+                    tel = rs.getString("Telefono_T");
+                    calle = rs.getString("Calle");
+                    col = rs.getString("Colonia");
+                    muni = rs.getString("Municipio");
+                    est = rs.getString("Estado");
+                 }
+                ide = Integer.toString(idE);
+                numca = Integer.toString(numCa);
+                ID_Encargado.setText(ide);
+                NumCalle.setText(numca);
+                Telefono.setText(tel);
+                Calle.setText(calle);
+                Colonia.setText(col);
+                Municipio.setText(muni);
+                Estado.setText(est);
+                
             } catch (SQLException ex){
                 JOptionPane.showMessageDialog(null, ex.toString());
             }
-            
-            }
         }
-        
-        
+        else{
+            JOptionPane.showMessageDialog(null, "La tienda con el Id ingresado no existe");
+        }
     }//GEN-LAST:event_saveActionPerformed
 
-    private void ID_TiendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ID_TiendaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ID_TiendaActionPerformed
-
-    
+    /**
+     * @param args the command line arguments
+     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
@@ -336,56 +328,4 @@ public class submenu extends javax.swing.JFrame {
         }
         return existe;
     }
-    
-    private boolean existeClaveE(int idE){
-        boolean existe = false;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Conexion conect = new Conexion();
-        Connection con = conect.getConexion();
-        String consulta = "SELECT ID_Encargado FROM Encargados WHERE ID_Encargado = ?";
-        try {
-            ps = con.prepareStatement(consulta);
-            ps.setInt(1, idE);
-            rs = ps.executeQuery();
-            
-            if(rs.next()){
-                existe = true;
-            }
-            
-        } catch (SQLException ex){
-            JOptionPane.showMessageDialog(null, ex.toString());
-            existe = false;
-        }
-        return existe;
-    }
-    
-    //Método no terminado para las query
-    /*private boolean guardar(){
-        boolean guardado = false;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Conexion conect = new Conexion();
-        Connection con = conect.getConexion();
-        String ins = "INSERT INTO Tiendas VALUES ("
-                + idT + ", " + idE + ", '" + data[0] + "', '" + data[1] + "', '" + data[2] + "', '" + data[3] + "', '" + data[4] + "', '" + data[5] + "')";
-        try {
-            ps = con.prepareStatement(ins);
-            ps.setInt(1, idE);
-            rs = ps.executeQuery();
-            
-            if(rs.next()){
-                guardado = true;
-            }
-            
-        } catch (SQLException ex){
-            JOptionPane.showMessageDialog(null, ex.toString());
-            guardado = false;
-        }
-
-        
-        return guardado;
-    }
-    
-    */
 }
