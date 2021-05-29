@@ -1,9 +1,20 @@
 
 package emprob;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import manejoBD.Conexion;
+
 
 public class consultarEncargados extends javax.swing.JFrame {
-
+    
+    
+    int iDE;
+    String nombre,tel;
     public consultarEncargados() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -84,11 +95,21 @@ public class consultarEncargados extends javax.swing.JFrame {
         back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Regreso.png"))); // NOI18N
         back.setBorderPainted(false);
         back.setContentAreaFilled(false);
+        back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backActionPerformed(evt);
+            }
+        });
         getContentPane().add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 350, 50, 50));
 
-        save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Borrar.png"))); // NOI18N
+        save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Buscar.png"))); // NOI18N
         save.setBorderPainted(false);
         save.setContentAreaFilled(false);
+        save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saveActionPerformed(evt);
+            }
+        });
         getContentPane().add(save, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 350, 60, 50));
 
         menuEncargados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondoSUB_opt.jpg"))); // NOI18N
@@ -110,15 +131,45 @@ public class consultarEncargados extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_TextoNombreActionPerformed
 
-    
-    public static void main(String args[]) {
-       
-        java.awt.EventQueue.invokeLater(new Runnable() {
+    private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
+        // TODO add your handling code here:
+        try{
+            iDE = Integer.parseInt(ID_Encargado.getText());
+        }catch(NumberFormatException  ex){
+            JOptionPane.showMessageDialog(null, "Ingrese valores numéricos en los id");
+        }
+        if(existeClaveE()){
+            try {
+                Statement sql = Conexion.getConexion().createStatement();
+                ResultSet rs;
+                rs= sql.executeQuery("SELECT * FROM Encargados where ID_Encargado = " + iDE);
+                while(rs.next()){
+                    nombre = rs.getString("Nombre_E");
+                    tel = rs.getString("Telefono_E");
+                 }
+                NombreEncar.setText(nombre);
+                Telefono_E.setText(tel);
+                
+            } catch (SQLException ex){
+                JOptionPane.showMessageDialog(null, ex.toString());
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "El encargado con el Id ingresado no existe");
+        }
+    }//GEN-LAST:event_saveActionPerformed
+
+    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+        // TODO add your handling code here:
+         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new consultarEncargados().setVisible(true);
+                new menu2Encargados().setVisible(true);
             }
         });
-    }
+        this.dispose();
+    }//GEN-LAST:event_backActionPerformed
+
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField ID_Encargado;
@@ -133,4 +184,27 @@ public class consultarEncargados extends javax.swing.JFrame {
     private javax.swing.JButton save;
     private javax.swing.JTextField subtituloEncargado;
     // End of variables declaration//GEN-END:variables
+
+    private boolean existeClaveE(){
+        boolean existe = false;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Conexion conect = new Conexion();
+        Connection con = conect.getConexion();
+        String consulta = "SELECT ID_Encargado FROM Encargados WHERE ID_Encargado = ?";
+        try {
+            ps = con.prepareStatement(consulta);
+            ps.setInt(1, iDE);
+            rs = ps.executeQuery();
+            
+            if(rs.next()){
+                existe = true;
+            }
+            
+        } catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, ex.toString());
+            existe = false;
+        }
+        return existe;
+    }
 }

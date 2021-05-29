@@ -14,6 +14,7 @@ public class menu2Reportes extends javax.swing.JFrame {
     /**
      * Creates new form menu2
      */
+    TipoConsulta tc = new TipoConsulta();
     public menu2Reportes() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -113,6 +114,17 @@ public class menu2Reportes extends javax.swing.JFrame {
 
     private void consultarbotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarbotonActionPerformed
         // TODO add your handling code here:
+         if (tc.consulta() == 0){
+            //Ir a ventana para consulta individual
+            java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new consultarReportes().setVisible(true);
+            }
+        });
+            this.dispose();
+        } else {
+            //Ir a ventana para consulta general
+        }
     }//GEN-LAST:event_consultarbotonActionPerformed
 
     private void eliminarbotonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarbotonActionPerformed
