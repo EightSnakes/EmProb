@@ -117,6 +117,12 @@ public class menu2Tiendas extends javax.swing.JFrame {
         //0 = individual, 1 = general
         if (tc.consulta() == 0){
             //Ir a ventana para consulta individual
+            java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new consultarTiendas().setVisible(true);
+            }
+        });
+            this.dispose();
         } else {
             //Ir a ventana para consulta general
         }

@@ -5,23 +5,26 @@
  */
 package emprob;
 
-import manejoBD.Conexion;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JOptionPane;
+import manejoBD.Conexion;
 
 /**
  *
  * @author LuisMa
  */
-public class submenu_Problemas extends javax.swing.JFrame {
+public class consultarProblemas extends javax.swing.JFrame {
 
     /**
      * Creates new form submenu_Problemas
      */
-    private String nombreP, desc, soluS;
-    private int iDP;
-    
-    public submenu_Problemas() {
+    int iDP;
+    String nombre, desc, solu;
+    public consultarProblemas() {
         initComponents();
         this.setLocationRelativeTo(null);
     }
@@ -45,8 +48,8 @@ public class submenu_Problemas extends javax.swing.JFrame {
         NombreProblema = new javax.swing.JTextField();
         Descripcion = new javax.swing.JTextField();
         Solucion = new javax.swing.JTextField();
-        back = new javax.swing.JButton();
-        save = new javax.swing.JButton();
+        back1 = new javax.swing.JButton();
+        save1 = new javax.swing.JButton();
         menuProblemas = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -59,9 +62,9 @@ public class submenu_Problemas extends javax.swing.JFrame {
         getContentPane().add(TituloProblemas, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 52, -1, 40));
 
         SubtituloProblemas.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        SubtituloProblemas.setText("Ingresa los datos:");
+        SubtituloProblemas.setText(" Ingresa los datos:");
         SubtituloProblemas.setBorder(null);
-        getContentPane().add(SubtituloProblemas, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 120, -1));
+        getContentPane().add(SubtituloProblemas, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 130, -1));
 
         TextoIDProblema.setEditable(false);
         TextoIDProblema.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
@@ -90,38 +93,37 @@ public class submenu_Problemas extends javax.swing.JFrame {
             }
         });
         getContentPane().add(TextoSolucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, -1, 20));
-
-        IDProblema.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IDProblemaActionPerformed(evt);
-            }
-        });
         getContentPane().add(IDProblema, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 150, 170, -1));
+
+        NombreProblema.setEditable(false);
         getContentPane().add(NombreProblema, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 180, 170, -1));
 
-        Descripcion.setText("\n");
+        Descripcion.setEditable(false);
+        Descripcion.setText(" ");
         getContentPane().add(Descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, 170, 80));
+
+        Solucion.setEditable(false);
         getContentPane().add(Solucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 310, 170, 80));
 
-        back.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Regreso.png"))); // NOI18N
-        back.setBorderPainted(false);
-        back.setContentAreaFilled(false);
-        back.addActionListener(new java.awt.event.ActionListener() {
+        back1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Regreso.png"))); // NOI18N
+        back1.setBorderPainted(false);
+        back1.setContentAreaFilled(false);
+        back1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                backActionPerformed(evt);
+                back1ActionPerformed(evt);
             }
         });
-        getContentPane().add(back, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 410, 50, 50));
+        getContentPane().add(back1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 50, 50));
 
-        save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Guardar.png"))); // NOI18N
-        save.setBorderPainted(false);
-        save.setContentAreaFilled(false);
-        save.addActionListener(new java.awt.event.ActionListener() {
+        save1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Buscar.png"))); // NOI18N
+        save1.setBorderPainted(false);
+        save1.setContentAreaFilled(false);
+        save1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                saveActionPerformed(evt);
+                save1ActionPerformed(evt);
             }
         });
-        getContentPane().add(save, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 410, 60, 50));
+        getContentPane().add(save1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 420, 60, 50));
 
         menuProblemas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondoSUB_opt.jpg"))); // NOI18N
         getContentPane().add(menuProblemas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -131,54 +133,48 @@ public class submenu_Problemas extends javax.swing.JFrame {
 
     private void TextoSolucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextoSolucionActionPerformed
         // TODO add your handling code here:
-        
     }//GEN-LAST:event_TextoSolucionActionPerformed
 
-    private void backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backActionPerformed
+    private void back1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_back1ActionPerformed
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new menu2Problemas().setVisible(true);
+                new menu2Encargados().setVisible(true);
             }
         });
-            this.dispose();              
-    }//GEN-LAST:event_backActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_back1ActionPerformed
 
-    private void IDProblemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IDProblemaActionPerformed
-        // TODO add your handling code here: 
-    }//GEN-LAST:event_IDProblemaActionPerformed
-
-    private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
+    private void save1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_save1ActionPerformed
         // TODO add your handling code here:
         try{
             iDP = Integer.parseInt(IDProblema.getText());
         }catch(NumberFormatException  ex){
             JOptionPane.showMessageDialog(null, "Ingrese valores numéricos en los id");
         }
-        nombreP = NombreProblema.getText();
-        desc = Descripcion.getText();
-        soluS = Solucion.getText();
         if(existeClave(iDP)){
-            JOptionPane.showMessageDialog(null, "ID de tienda ya existente");
-        }
-        else{
-            try{
-            Statement sql = Conexion.getConexion().createStatement();
-            sql.executeUpdate("INSERT INTO Problema " + "VALUES ( " + iDP +", '" + nombreP + "' ,'" + desc + "', '" + soluS + "')" );
-            JOptionPane.showMessageDialog(null, "Datos Guardados");
-            IDProblema.setText(null);
-            NombreProblema.setText(null);
-            Descripcion.setText(null);
-            Solucion.setText(null);
-            } catch(SQLException ex){
-            JOptionPane.showMessageDialog(null, ex.toString());
+            try {
+                Statement sql = Conexion.getConexion().createStatement();
+                ResultSet rs;
+                rs= sql.executeQuery("SELECT * FROM Problema where ID_Problema = " + iDP);
+                while(rs.next()){
+                    nombre = rs.getString("Nombre_P");
+                    desc = rs.getString("Descripcion");
+                    solu = rs.getString("Solucion_Sugerida");
+                 }
+                NombreProblema.setText(nombre);
+                Descripcion.setText(desc);
+                Solucion.setText(solu);
+                
+            } catch (SQLException ex){
+                JOptionPane.showMessageDialog(null, ex.toString());
             }
         }
-    }//GEN-LAST:event_saveActionPerformed
+        else{
+            JOptionPane.showMessageDialog(null, "La tienda con el Id ingresado no existe");
+        }
+    }//GEN-LAST:event_save1ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Descripcion;
@@ -191,9 +187,9 @@ public class submenu_Problemas extends javax.swing.JFrame {
     private javax.swing.JTextField TextoNombreProblema;
     private javax.swing.JTextField TextoSolucion;
     private javax.swing.JTextField TituloProblemas;
-    private javax.swing.JButton back;
+    private javax.swing.JButton back1;
     private javax.swing.JLabel menuProblemas;
-    private javax.swing.JButton save;
+    private javax.swing.JButton save1;
     // End of variables declaration//GEN-END:variables
 
     private boolean existeClave(int nombre){
@@ -218,5 +214,4 @@ public class submenu_Problemas extends javax.swing.JFrame {
         }
         return existe;
     }
-        
-}//class
+}
