@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package emprob;
+package eliminacionModificacion;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,19 +12,21 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import manejoBD.Conexion;
+import emprob.*;
+
 
 /**
  *
  * @author LuisMa
  */
-public class consultarProblemas extends javax.swing.JFrame {
+public class modificarProblemas extends javax.swing.JFrame {
 
     /**
      * Creates new form submenu_Problemas
      */
     int iDP;
     String nombre, desc, solu;
-    public consultarProblemas() {
+    public modificarProblemas() {
         initComponents();
         this.setLocationRelativeTo(null);
     }

@@ -48,7 +48,7 @@ public class MenuInter extends javax.swing.JFrame {
         jButton2.setFont(new java.awt.Font("sansserif", 1, 24)); // NOI18N
         jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/supervisormeniimagen_opt.jpg"))); // NOI18N
-        jButton2.setText("Supervisores");
+        jButton2.setText("Encargados");
         jButton2.setBorderPainted(false);
         jButton2.setContentAreaFilled(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {

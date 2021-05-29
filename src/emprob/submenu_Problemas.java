@@ -150,7 +150,11 @@ public class submenu_Problemas extends javax.swing.JFrame {
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
         // TODO add your handling code here:
-        try{
+        if(NombreProblema.getText().equals("")||IDProblema.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Tiene que ingresar el nombre y el ID del problema");
+        }
+        else{
+         try{
             iDP = Integer.parseInt(IDProblema.getText());
         }catch(NumberFormatException  ex){
             JOptionPane.showMessageDialog(null, "Ingrese valores numéricos en los id");
@@ -159,7 +163,7 @@ public class submenu_Problemas extends javax.swing.JFrame {
         desc = Descripcion.getText();
         soluS = Solucion.getText();
         if(existeClave(iDP)){
-            JOptionPane.showMessageDialog(null, "ID de tienda ya existente");
+            JOptionPane.showMessageDialog(null, "ID de problema ya existente");
         }
         else{
             try{
@@ -173,7 +177,9 @@ public class submenu_Problemas extends javax.swing.JFrame {
             } catch(SQLException ex){
             JOptionPane.showMessageDialog(null, ex.toString());
             }
+        }   
         }
+        
     }//GEN-LAST:event_saveActionPerformed
 
     /**
