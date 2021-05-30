@@ -182,15 +182,15 @@ public class submenu_Reportes extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "ID de tienda no existente");
         else{
             try{
-            Statement sql = Conexion.getConexion().createStatement();
-            sql.executeUpdate("INSERT INTO Reportes " + "VALUES ( " + iDR + ", " + iDT + ", '" + fecha + "')" );
-            sql.executeUpdate("INSERT INTO EncabezadosReportes " + "VALUES ( " + iDP + ", " + iDR + ", '" + resul + "',' " + obser +"')" );
-            JOptionPane.showMessageDialog(null, "Datos Guardados");
-            IDProblema.setText(null);
-            IDReporte.setText(null);
-            IDTienda.setText(null);
-            Fecha.setText(null);
-            Observaciones.setText(null);
+                Statement sql = Conexion.getConexion().createStatement();
+                sql.executeUpdate("INSERT INTO Reportes " + "VALUES ( " + iDR + ", " + iDT + ", '" + fecha + "')" );
+                sql.executeUpdate("INSERT INTO EncabezadosReportes " + "VALUES ( " + iDP + ", " + iDR + ", '" + resul + "',' " + obser +"')" );
+                JOptionPane.showMessageDialog(null, "Datos Guardados");
+                IDProblema.setText(null);
+                IDReporte.setText(null);
+                IDTienda.setText(null);
+                Fecha.setText(null);
+                Observaciones.setText(null);
             } catch(SQLException ex){
             JOptionPane.showMessageDialog(null, ex.toString());
             }

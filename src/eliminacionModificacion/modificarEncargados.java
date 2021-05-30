@@ -36,6 +36,7 @@ public class modificarEncargados extends javax.swing.JFrame {
         Telefono_E = new javax.swing.JTextField();
         back = new javax.swing.JButton();
         save = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         menuEncargados = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -111,7 +112,18 @@ public class modificarEncargados extends javax.swing.JFrame {
                 saveActionPerformed(evt);
             }
         });
-        getContentPane().add(save, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 350, 60, 50));
+        getContentPane().add(save, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 360, 60, 50));
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Guardar.png"))); // NOI18N
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.setEnabled(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 360, -1, -1));
 
         menuEncargados.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondoSUB_opt.jpg"))); // NOI18N
         getContentPane().add(menuEncargados, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -150,7 +162,11 @@ public class modificarEncargados extends javax.swing.JFrame {
                  }
                 NombreEncar.setText(nombre);
                 Telefono_E.setText(tel);
-                
+                ID_Encargado.setEditable(false);
+                NombreEncar.setEditable(true);
+                Telefono_E.setEditable(true);
+                jButton1.setEnabled(true);
+                save.setEnabled(false);
             } catch (SQLException ex){
                 JOptionPane.showMessageDialog(null, ex.toString());
             }
@@ -170,6 +186,34 @@ public class modificarEncargados extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_backActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String nueNom, nueTele;
+        if(NombreEncar.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Tiene que ingresar el nombre");
+        }
+        else{
+            nueNom = NombreEncar.getText();
+            nueTele = Telefono_E.getText();
+            try {
+                Statement sql = Conexion.getConexion().createStatement();
+                sql.executeUpdate("UPDATE Encargados Set Nombre_E = '"+nueNom+"', Telefono_E = '"+ nueTele +"' WHERE ID_Encargado ="+ iDE +";");
+                JOptionPane.showMessageDialog(null, "Datos guardados con éxito.");
+                ID_Encargado.setText(null);
+                NombreEncar.setText(null);
+                Telefono_E.setText(null);
+                NombreEncar.setEditable(false);
+                Telefono_E.setEditable(false);
+                ID_Encargado.setEditable(true);
+                jButton1.setEnabled(false);
+                save.setEnabled(true);
+                sql.close();
+            } catch (SQLException ex){
+                JOptionPane.showMessageDialog(null, ex.toString());
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -181,6 +225,7 @@ public class modificarEncargados extends javax.swing.JFrame {
     private javax.swing.JTextField TextoNombre;
     private javax.swing.JTextField TituloEncargados;
     private javax.swing.JButton back;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel menuEncargados;
     private javax.swing.JButton save;
     private javax.swing.JTextField subtituloEncargado;
