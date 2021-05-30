@@ -52,6 +52,7 @@ public class modificarProblemas extends javax.swing.JFrame {
         Solucion = new javax.swing.JTextField();
         back1 = new javax.swing.JButton();
         save1 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         menuProblemas = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -115,7 +116,7 @@ public class modificarProblemas extends javax.swing.JFrame {
                 back1ActionPerformed(evt);
             }
         });
-        getContentPane().add(back1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 50, 50));
+        getContentPane().add(back1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 420, 50, 50));
 
         save1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Buscar.png"))); // NOI18N
         save1.setBorderPainted(false);
@@ -126,6 +127,17 @@ public class modificarProblemas extends javax.swing.JFrame {
             }
         });
         getContentPane().add(save1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 420, 60, 50));
+
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Guardar.png"))); // NOI18N
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.setEnabled(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 420, -1, -1));
 
         menuProblemas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondoSUB_opt.jpg"))); // NOI18N
         getContentPane().add(menuProblemas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -167,6 +179,12 @@ public class modificarProblemas extends javax.swing.JFrame {
                 NombreProblema.setText(nombre);
                 Descripcion.setText(desc);
                 Solucion.setText(solu);
+                IDProblema.setEditable(false);
+                NombreProblema.setEditable(true);
+                Descripcion.setEditable(true);
+                Solucion.setEditable(true);
+                save1.setEnabled(false);
+                jButton1.setEnabled(true);
                 
             } catch (SQLException ex){
                 JOptionPane.showMessageDialog(null, ex.toString());
@@ -176,6 +194,36 @@ public class modificarProblemas extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "La tienda con el Id ingresado no existe");
         }
     }//GEN-LAST:event_save1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String nueNom, nueDesc, nueSol;
+        if(NombreProblema.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Tiene que ingresar el nombre");
+        }
+        else{
+            nueNom = NombreProblema.getText();
+            nueDesc = Descripcion.getText();
+            nueSol = Solucion.getText();
+            try{
+                Statement sql = Conexion.getConexion().createStatement();
+                sql.executeUpdate("UPDATE Problema Set Nombre_P = '"+nueNom+"', Descripcion = '"+ nueDesc +"', Solucion_Sugerida = '" + nueSol +"' WHERE ID_Problema ="+ iDP +";");
+                JOptionPane.showMessageDialog(null, "Datos guardados con éxito.");
+                IDProblema.setText(null);
+                NombreProblema.setText(null);
+                Descripcion.setText(null);
+                Solucion.setText(null);
+                IDProblema.setEditable(true);
+                NombreProblema.setEditable(false);
+                Descripcion.setEditable(false);
+                Solucion.setEditable(false);
+                save1.setEnabled(true);
+                jButton1.setEnabled(false);
+            } catch (SQLException ex){
+                JOptionPane.showMessageDialog(null, ex.toString());
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -190,6 +238,7 @@ public class modificarProblemas extends javax.swing.JFrame {
     private javax.swing.JTextField TextoSolucion;
     private javax.swing.JTextField TituloProblemas;
     private javax.swing.JButton back1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel menuProblemas;
     private javax.swing.JButton save1;
     // End of variables declaration//GEN-END:variables

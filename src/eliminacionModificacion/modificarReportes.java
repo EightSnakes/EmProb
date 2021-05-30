@@ -57,6 +57,7 @@ public class modificarReportes extends javax.swing.JFrame {
         jTextPane1 = new javax.swing.JTextPane();
         back1 = new javax.swing.JButton();
         save1 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -149,6 +150,17 @@ public class modificarReportes extends javax.swing.JFrame {
         });
         getContentPane().add(save1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 430, 60, 50));
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Guardar.png"))); // NOI18N
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.setEnabled(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 430, -1, -1));
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondoSUB_opt.jpg"))); // NOI18N
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -194,7 +206,16 @@ public class modificarReportes extends javax.swing.JFrame {
                 jTextField2.setText(Integer.toString(iDP));
                 if(resu.equals("S")){
                     jCheckBox1.setSelected(true);
-                }    
+                }
+                jTextField5.setEditable(false);
+                jFormattedTextField1.setEditable(true);
+                jTextPane1.setEditable(true);
+                jTextField1.setEditable(true);
+                jTextField2.setEditable(true);
+                jCheckBox1.setEnabled(true);
+                save1.setEnabled(false);
+                jButton1.setEnabled(true);
+                
             } catch (SQLException ex){
                 JOptionPane.showMessageDialog(null, ex.toString());
             }
@@ -207,6 +228,62 @@ public class modificarReportes extends javax.swing.JFrame {
     private void SubtituloReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubtituloReportesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_SubtituloReportesActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int nueiDP, nueiDT;
+        String nueObs, nueFec;
+        char nueSol;
+        if(jTextField1.getText().equals("") || jTextField2.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Tiene que ingresar un ID de una tienda y de un problema");
+        }
+        else{
+            nueObs = jTextPane1.getText();
+            nueFec =jFormattedTextField1.getText();
+            if(jCheckBox1.isSelected())
+                nueSol = 'S';
+            else
+                nueSol = 'N';
+            try{
+                nueiDP = Integer.parseInt(jTextField2.getText());
+                nueiDT = Integer.parseInt(jTextField1.getText());
+                if(!existeClaveT(nueiDT)){
+                    JOptionPane.showMessageDialog(null, "ID de tienda no existente");
+                }
+                else if(!existeClaveP(nueiDP)){
+                    JOptionPane.showMessageDialog(null, "ID del problema no existente");
+                }
+                else{
+                    try{
+                        Statement sql = Conexion.getConexion().createStatement();
+                        sql.executeUpdate("UPDATE Reportes Set ID_Tienda = "+nueiDT+", Fecha_R = '"+ nueFec +"' WHERE ID_Reporte ="+ idR +";");
+                        sql.executeUpdate("UPDATE EncabezadosReportes Set ID_Problema = "+nueiDP+", Observaciones = '"+ nueObs +"', Resuelto = '" + nueSol +"' WHERE ID_Reporte ="+ idR +";");
+                        JOptionPane.showMessageDialog(null, "Datos guardados con éxito.");
+                        
+                        jTextField5.setText(null);
+                        jFormattedTextField1.setText(null);
+                        jTextPane1.setText(null);
+                        jTextField1.setText(null);
+                        jTextField2.setText(null);
+                        jCheckBox1.setSelected(false);
+                        
+                        jTextField5.setEditable(true);
+                        jFormattedTextField1.setEditable(false);
+                         jTextPane1.setEditable(false);
+                        jTextField1.setEditable(false);
+                        jTextField2.setEditable(false);
+                        jCheckBox1.setEnabled(false);
+                        save1.setEnabled(true);
+                        jButton1.setEnabled(false);
+                    }catch(SQLException ex){
+                        JOptionPane.showMessageDialog(null, ex.toString());
+                    }
+                }
+            }catch(NumberFormatException  ex){
+                JOptionPane.showMessageDialog(null, "Ingrese valores numéricos en los id");
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -223,6 +300,7 @@ public class modificarReportes extends javax.swing.JFrame {
     private javax.swing.JTextField TextoResuelto;
     private javax.swing.JTextField TituloReportes;
     private javax.swing.JButton back1;
+    private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel1;
@@ -240,6 +318,50 @@ private boolean existeClaveR(int nombre){
         Conexion conect = new Conexion();
         Connection con = conect.getConexion();
         String consulta = "SELECT ID_Reporte FROM Reportes WHERE ID_Reporte = ?";
+        try {
+            ps = con.prepareStatement(consulta);
+            ps.setInt(1, nombre);
+            rs = ps.executeQuery();
+            
+            if(rs.next()){
+               existe = true;
+            }
+            
+        } catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, ex.toString());
+            existe = false;
+        }
+        return existe;
+    }
+    private boolean existeClaveT(int nombre){
+        boolean existe = false;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Conexion conect = new Conexion();
+        Connection con = conect.getConexion();
+        String consulta = "SELECT ID_Tienda FROM Tiendas WHERE ID_Tienda = ?";
+        try {
+            ps = con.prepareStatement(consulta);
+            ps.setInt(1, nombre);
+            rs = ps.executeQuery();
+            
+            if(rs.next()){
+               existe = true;
+            }
+            
+        } catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, ex.toString());
+            existe = false;
+        }
+        return existe;
+    }
+    private boolean existeClaveP(int nombre){
+        boolean existe = false;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Conexion conect = new Conexion();
+        Connection con = conect.getConexion();
+        String consulta = "SELECT ID_Problema FROM Problema WHERE ID_Problema = ?";
         try {
             ps = con.prepareStatement(consulta);
             ps.setInt(1, nombre);

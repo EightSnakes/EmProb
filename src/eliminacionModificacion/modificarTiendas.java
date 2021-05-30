@@ -52,6 +52,7 @@ public class modificarTiendas extends javax.swing.JFrame {
         Estado = new javax.swing.JTextField();
         Back = new javax.swing.JButton();
         save = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         menusub = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -200,6 +201,17 @@ public class modificarTiendas extends javax.swing.JFrame {
         });
         getContentPane().add(save, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, 50, 50));
 
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Guardar.png"))); // NOI18N
+        jButton1.setBorderPainted(false);
+        jButton1.setContentAreaFilled(false);
+        jButton1.setEnabled(false);
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 400, -1, -1));
+
         menusub.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondoSUB_opt.jpg"))); // NOI18N
         getContentPane().add(menusub, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -267,6 +279,17 @@ public class modificarTiendas extends javax.swing.JFrame {
                 Municipio.setText(muni);
                 Estado.setText(est);
                 
+                ID_Tienda.setEditable(false);
+                ID_Encargado.setEditable(true);
+                NumCalle.setEditable(true);
+                Telefono.setEditable(true);
+                Calle.setEditable(true);
+                Colonia.setEditable(true);
+                Municipio.setEditable(true);
+                Estado.setEditable(true);
+                
+                jButton1.setEnabled(true);
+                save.setEnabled(false);
             } catch (SQLException ex){
                 JOptionPane.showMessageDialog(null, ex.toString());
             }
@@ -275,6 +298,61 @@ public class modificarTiendas extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "La tienda con el Id ingresado no existe");
         }
     }//GEN-LAST:event_saveActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        String nueTele, nueCalle, nueEst, nueCol, nueMuni;
+        int nueIDE, nueNum;
+        if(ID_Encargado.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Tiene que ingresar un ID de encargado");
+        }
+        else{
+            nueCalle = Calle.getText();
+            nueTele = Telefono.getText();
+            nueEst = Estado.getText();
+            nueCol = Colonia.getText();
+            nueMuni = Municipio.getText();
+            try {
+                nueIDE = Integer.parseInt(ID_Encargado.getText());
+                nueNum = Integer.parseInt(NumCalle.getText());
+                if (!existeClaveE(nueIDE)){
+                    JOptionPane.showMessageDialog(null, "El idEncargado es inexistente, ingrese un id registrado.");
+                }
+                else{
+                    try{
+                        Statement sql = Conexion.getConexion().createStatement();
+                        sql.executeUpdate("UPDATE Tiendas Set ID_Encargado = "+nueIDE+", Telefono_T = '"+ nueTele +"', Calle = '" + nueCalle +"', Numero_Calle = " + nueNum +", Colonia = '" + nueCol + "', Municipio = '" + nueMuni + "', Estado = '" + nueEst +"' WHERE ID_Tienda ="+ idT +";");
+                        JOptionPane.showMessageDialog(null, "Datos guardados con éxito.");
+                        ID_Tienda.setText(null);
+                        ID_Encargado.setText(null);
+                        Calle.setText(null);
+                        Telefono.setText(null);
+                        Estado.setText(null);
+                        Colonia.setText(null);
+                        NumCalle.setText(null);
+                        Municipio.setText(null);
+                        
+                        Estado.setEditable(false);
+                        Colonia.setEditable(false);
+                        ID_Tienda.setEditable(true);
+                        Calle.setEditable(false);
+                        Municipio.setEditable(false);
+                        ID_Encargado.setEditable(false);
+                        Telefono.setEditable(false);
+                        NumCalle.setEditable(false);
+                        
+                        jButton1.setEnabled(false);
+                        save.setEnabled(true);
+                    }catch (SQLException ex){
+                        JOptionPane.showMessageDialog(null, ex.toString());
+                     }
+                }
+            }catch(NumberFormatException  ex){
+                JOptionPane.showMessageDialog(null, "Ingrese valores numéricos en los id");
+            }
+           
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -299,6 +377,7 @@ public class modificarTiendas extends javax.swing.JFrame {
     private javax.swing.JTextField TextoNumCalle;
     private javax.swing.JTextField TextoTelefono;
     private javax.swing.JTextField TituloTiendas;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel menusub;
@@ -316,6 +395,28 @@ public class modificarTiendas extends javax.swing.JFrame {
         try {
             ps = con.prepareStatement(consulta);
             ps.setInt(1, idT);
+            rs = ps.executeQuery();
+            
+            if(rs.next()){
+                existe = true;
+            }
+            
+        } catch (SQLException ex){
+            JOptionPane.showMessageDialog(null, ex.toString());
+            existe = false;
+        }
+        return existe;
+    }
+    private boolean existeClaveE(int idE){
+        boolean existe = false;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Conexion conect = new Conexion();
+        Connection con = conect.getConexion();
+        String consulta = "SELECT ID_Encargado FROM Encargados WHERE ID_Encargado = ?";
+        try {
+            ps = con.prepareStatement(consulta);
+            ps.setInt(1, idE);
             rs = ps.executeQuery();
             
             if(rs.next()){
