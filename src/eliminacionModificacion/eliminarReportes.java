@@ -14,10 +14,7 @@ import manejoBD.Conexion;
 import java.sql.Statement;
 import emprob.*;
 
-/**
- *
- * @author LuisMa
- */
+
 public class eliminarReportes extends javax.swing.JFrame {
 
     /**
