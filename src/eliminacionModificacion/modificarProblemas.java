@@ -15,10 +15,7 @@ import manejoBD.Conexion;
 import emprob.*;
 
 
-/**
- *
- * @author LuisMa
- */
+
 public class modificarProblemas extends javax.swing.JFrame {
 
     /**
