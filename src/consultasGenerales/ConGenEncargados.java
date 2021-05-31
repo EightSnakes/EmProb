@@ -14,10 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import manejoBD.Conexion;
 
-/**
- *
- * @author Slonder
- */
+
 public class ConGenEncargados extends javax.swing.JFrame {
 
     /**
