@@ -13,10 +13,7 @@ import javax.swing.JOptionPane;
 import manejoBD.Conexion;
 import java.sql.Statement;
 
-/**
- *
- * @author LuisMa
- */
+
 public class consultarReportes extends javax.swing.JFrame {
 
     /**
