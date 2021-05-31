@@ -6,10 +6,7 @@
 package emprob;
 import consultasGenerales.ConGenEncargados;
 import eliminacionModificacion.*;
-/**
- *
- * @author LuisMa
- */
+
 public class menu2Encargados extends javax.swing.JFrame {
 
     /**
