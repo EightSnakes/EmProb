@@ -13,10 +13,6 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import manejoBD.Conexion;
 
-/**
- *
- * @author LuisMa
- */
 public class consultarProblemas extends javax.swing.JFrame {
 
     /**
