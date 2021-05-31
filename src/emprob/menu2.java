@@ -5,10 +5,7 @@
  */
 package emprob;
 
-/**
- *
- * @author LuisMa
- */
+
 public class menu2 extends javax.swing.JFrame {
 
     /**
