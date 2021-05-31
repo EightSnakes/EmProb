@@ -8,10 +8,7 @@ import manejoBD.Conexion;
 import java.sql.*;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Snake
- */
+
 public class InicioSesion extends javax.swing.JFrame {
     
 
