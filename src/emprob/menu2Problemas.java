@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package emprob;
+import consultasGenerales.ConGenProblemas;
 import eliminacionModificacion.*;
 
 /**
@@ -131,6 +132,12 @@ public class menu2Problemas extends javax.swing.JFrame {
             this.dispose();
         } else {
             //Ir a ventana para consulta general
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    new ConGenProblemas().setVisible(true);
+                }
+            });
+            this.dispose();
         }
     }//GEN-LAST:event_consultarbotonActionPerformed
 

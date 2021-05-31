@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package emprob;
+import consultasGenerales.ConGenEncargados;
 import eliminacionModificacion.*;
 /**
  *
@@ -130,6 +131,12 @@ public class menu2Encargados extends javax.swing.JFrame {
             this.dispose();
         } else {
             //Ir a ventana para consulta general
+            java.awt.EventQueue.invokeLater(new Runnable() {
+                public void run() {
+                    new ConGenEncargados().setVisible(true);
+                }
+            });
+        this.dispose();
         }
     }//GEN-LAST:event_consultarbotonActionPerformed
 
