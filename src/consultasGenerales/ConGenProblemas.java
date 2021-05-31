@@ -58,7 +58,7 @@ public class ConGenProblemas extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Consultando Encargados");
+        setTitle("Consultando Problemas");
         setBackground(new java.awt.Color(0, 0, 0));
         setIconImages(null);
         setLocation(new java.awt.Point(0, 0));
@@ -68,17 +68,17 @@ public class ConGenProblemas extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "ID_Encargado", "Nombre_E", "Telefono_E"
+                "ID_Problema", "Nombre_P", "Descripcion", "Solucion_Sugerida"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
