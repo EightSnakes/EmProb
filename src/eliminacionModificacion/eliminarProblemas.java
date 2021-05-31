@@ -14,10 +14,7 @@ import javax.swing.JOptionPane;
 import manejoBD.Conexion;
 import emprob.*;
 
-/**
- *
- * @author LuisMa
- */
+
 public class eliminarProblemas extends javax.swing.JFrame {
 
     /**
