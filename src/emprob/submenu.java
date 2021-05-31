@@ -13,10 +13,7 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import manejoBD.Conexion;
 
-/**
- *
- * @author LuisMa
- */
+
 public class submenu extends javax.swing.JFrame {
 
     private int idT;
