@@ -6,10 +6,7 @@
 package emprob;
 import consultasGenerales.*;
 import eliminacionModificacion.*;
-/**
- *
- * @author LuisMa
- */
+
 public class menu2Reportes extends javax.swing.JFrame {
 
     /**
