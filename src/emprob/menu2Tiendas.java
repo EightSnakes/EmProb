@@ -6,10 +6,7 @@
 package emprob;
 import consultasGenerales.ConGenTiendas;
 import eliminacionModificacion.*;
-/**
- *
- * @author LuisMa
- */
+
 public class menu2Tiendas extends javax.swing.JFrame {
 
     /**
