@@ -9,10 +9,6 @@ import manejoBD.Conexion;
 import java.sql.*;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author LuisMa
- */
 public class submenu_Problemas extends javax.swing.JFrame {
 
     /**
