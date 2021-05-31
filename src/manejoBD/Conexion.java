@@ -5,10 +5,6 @@
  */
 package manejoBD;
 import java.sql.*;
-/**
- *
- * @author Snake
- */
 public class Conexion {
     public static Connection getConexion(){
         String conexionUrl = "jdbc:sqlserver://localhost:1433;"
