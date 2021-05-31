@@ -15,10 +15,7 @@ import java.sql.Statement;
 import emprob.*;
 
 
-/**
- *
- * @author LuisMa
- */
+
 public class modificarReportes extends javax.swing.JFrame {
 
     /**
