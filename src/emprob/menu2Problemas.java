@@ -7,10 +7,7 @@ package emprob;
 import consultasGenerales.ConGenProblemas;
 import eliminacionModificacion.*;
 
-/**
- *
- * @author LuisMa
- */
+
 public class menu2Problemas extends javax.swing.JFrame {
 
     /**
