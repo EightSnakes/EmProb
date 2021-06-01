@@ -54,6 +54,7 @@ public class submenu_Problemas extends javax.swing.JFrame {
         TituloProblemas.setBorder(null);
         getContentPane().add(TituloProblemas, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 52, -1, 40));
 
+        SubtituloProblemas.setEditable(false);
         SubtituloProblemas.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         SubtituloProblemas.setText("Ingresa los datos:");
         SubtituloProblemas.setBorder(null);
@@ -71,6 +72,7 @@ public class submenu_Problemas extends javax.swing.JFrame {
         TextoNombreProblema.setBorder(null);
         getContentPane().add(TextoNombreProblema, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
 
+        TextoDescripcion.setEditable(false);
         TextoDescripcion.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         TextoDescripcion.setText("Descripcion:");
         TextoDescripcion.setBorder(null);

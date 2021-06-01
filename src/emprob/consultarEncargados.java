@@ -44,6 +44,7 @@ public class consultarEncargados extends javax.swing.JFrame {
         TituloEncargados.setFont(new java.awt.Font("Arial Black", 0, 34)); // NOI18N
         TituloEncargados.setText("ENCARGADOS");
         TituloEncargados.setBorder(null);
+        TituloEncargados.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         TituloEncargados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TituloEncargadosActionPerformed(evt);
@@ -66,6 +67,7 @@ public class consultarEncargados extends javax.swing.JFrame {
         TextoID_Encargado.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         TextoID_Encargado.setText("ID Encargado:");
         TextoID_Encargado.setBorder(null);
+        TextoID_Encargado.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(TextoID_Encargado, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
 
         TextoNombre.setEditable(false);
@@ -137,6 +139,7 @@ public class consultarEncargados extends javax.swing.JFrame {
             iDE = Integer.parseInt(ID_Encargado.getText());
         }catch(NumberFormatException  ex){
             JOptionPane.showMessageDialog(null, "Ingrese valores numéricos en los id");
+            return;
         }
         if(existeClaveE()){
             try {

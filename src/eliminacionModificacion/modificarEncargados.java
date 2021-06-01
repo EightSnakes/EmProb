@@ -150,6 +150,7 @@ public class modificarEncargados extends javax.swing.JFrame {
             iDE = Integer.parseInt(ID_Encargado.getText());
         }catch(NumberFormatException  ex){
             JOptionPane.showMessageDialog(null, "Ingrese valores numéricos en los id");
+            return;
         }
         if(existeClaveE()){
             try {
@@ -199,6 +200,7 @@ public class modificarEncargados extends javax.swing.JFrame {
                 Statement sql = Conexion.getConexion().createStatement();
                 sql.executeUpdate("UPDATE Encargados Set Nombre_E = '"+nueNom+"', Telefono_E = '"+ nueTele +"' WHERE ID_Encargado ="+ iDE +";");
                 JOptionPane.showMessageDialog(null, "Datos guardados con éxito.");
+                //iDE=0;
                 ID_Encargado.setText(null);
                 NombreEncar.setText(null);
                 Telefono_E.setText(null);

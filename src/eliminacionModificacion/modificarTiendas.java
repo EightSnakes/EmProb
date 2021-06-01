@@ -254,6 +254,7 @@ public class modificarTiendas extends javax.swing.JFrame {
             idT = Integer.parseInt(ID_Tienda.getText());
         }catch(NumberFormatException  ex){
             JOptionPane.showMessageDialog(null, "Ingrese valores numéricos en los id");
+            return;
         }
         if(existeClaveT(idT)){
             try {

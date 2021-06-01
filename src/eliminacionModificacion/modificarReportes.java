@@ -60,11 +60,13 @@ public class modificarReportes extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        TituloReportes.setEditable(false);
         TituloReportes.setFont(new java.awt.Font("Arial Black", 0, 36)); // NOI18N
         TituloReportes.setText("REPORTES");
         TituloReportes.setBorder(null);
         getContentPane().add(TituloReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 50, 220, 40));
 
+        SubtituloReportes.setEditable(false);
         SubtituloReportes.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         SubtituloReportes.setText("I Ingresa los datos:");
         SubtituloReportes.setBorder(null);
@@ -75,31 +77,37 @@ public class modificarReportes extends javax.swing.JFrame {
         });
         getContentPane().add(SubtituloReportes, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 120, 120, 20));
 
+        TextoIDReporte.setEditable(false);
         TextoIDReporte.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         TextoIDReporte.setText("ID_Reporte:");
         TextoIDReporte.setBorder(null);
         getContentPane().add(TextoIDReporte, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, -1, -1));
 
+        TextoIDTienda.setEditable(false);
         TextoIDTienda.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         TextoIDTienda.setText("ID Tienda:");
         TextoIDTienda.setBorder(null);
         getContentPane().add(TextoIDTienda, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, -1, -1));
 
+        TextoIDProblema.setEditable(false);
         TextoIDProblema.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         TextoIDProblema.setText("ID Problema:");
         TextoIDProblema.setBorder(null);
         getContentPane().add(TextoIDProblema, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 210, -1, -1));
 
+        TextoFecha.setEditable(false);
         TextoFecha.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         TextoFecha.setText("Fecha:");
         TextoFecha.setBorder(null);
         getContentPane().add(TextoFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, -1, -1));
 
+        TextoResuelto.setEditable(false);
         TextoResuelto.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         TextoResuelto.setText("Resuelto:");
         TextoResuelto.setBorder(null);
         getContentPane().add(TextoResuelto, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, -1, -1));
 
+        TextoObservaciones.setEditable(false);
         TextoObservaciones.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         TextoObservaciones.setText("Observaciones:");
         TextoObservaciones.setBorder(null);
@@ -116,7 +124,6 @@ public class modificarReportes extends javax.swing.JFrame {
         jTextField2.setEditable(false);
         getContentPane().add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 210, 180, -1));
 
-        jCheckBox1.setForeground(new java.awt.Color(0, 0, 0));
         jCheckBox1.setText("Si");
         jCheckBox1.setBorder(null);
         jCheckBox1.setEnabled(false);
@@ -180,6 +187,7 @@ public class modificarReportes extends javax.swing.JFrame {
             idR = Integer.parseInt(jTextField5.getText());
         }catch(NumberFormatException  ex){
             JOptionPane.showMessageDialog(null, "Ingrese valores numéricos en los id");
+            return;
         }
         if(existeClaveR(idR)){
             try {

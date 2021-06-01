@@ -79,6 +79,11 @@ public class submenu_Encargados extends javax.swing.JFrame {
         TextoID_Encargado.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         TextoID_Encargado.setText("ID Encargado:");
         TextoID_Encargado.setBorder(null);
+        TextoID_Encargado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextoID_EncargadoActionPerformed(evt);
+            }
+        });
         getContentPane().add(TextoID_Encargado, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 160, -1, -1));
 
         TextoNombre.setEditable(false);
@@ -180,6 +185,10 @@ public class submenu_Encargados extends javax.swing.JFrame {
         }
         } 
     }//GEN-LAST:event_saveActionPerformed
+
+    private void TextoID_EncargadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextoID_EncargadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextoID_EncargadoActionPerformed
 
     
     

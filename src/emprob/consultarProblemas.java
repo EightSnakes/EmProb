@@ -57,6 +57,7 @@ public class consultarProblemas extends javax.swing.JFrame {
         TituloProblemas.setBorder(null);
         getContentPane().add(TituloProblemas, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 52, -1, 40));
 
+        SubtituloProblemas.setEditable(false);
         SubtituloProblemas.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         SubtituloProblemas.setText(" Ingresa los datos:");
         SubtituloProblemas.setBorder(null);
@@ -72,8 +73,14 @@ public class consultarProblemas extends javax.swing.JFrame {
         TextoNombreProblema.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         TextoNombreProblema.setText("Nombre del Problema:");
         TextoNombreProblema.setBorder(null);
+        TextoNombreProblema.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TextoNombreProblemaActionPerformed(evt);
+            }
+        });
         getContentPane().add(TextoNombreProblema, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, -1, -1));
 
+        TextoDescripcion.setEditable(false);
         TextoDescripcion.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         TextoDescripcion.setText("Descripcion:");
         TextoDescripcion.setBorder(null);
@@ -109,7 +116,7 @@ public class consultarProblemas extends javax.swing.JFrame {
                 back1ActionPerformed(evt);
             }
         });
-        getContentPane().add(back1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 50, 50));
+        getContentPane().add(back1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 410, 50, 50));
 
         save1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Buscar.png"))); // NOI18N
         save1.setBorderPainted(false);
@@ -119,7 +126,7 @@ public class consultarProblemas extends javax.swing.JFrame {
                 save1ActionPerformed(evt);
             }
         });
-        getContentPane().add(save1, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 420, 60, 50));
+        getContentPane().add(save1, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 400, 70, 70));
 
         menuProblemas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/fondoSUB_opt.jpg"))); // NOI18N
         getContentPane().add(menuProblemas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
@@ -170,6 +177,10 @@ public class consultarProblemas extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "La tienda con el Id ingresado no existe");
         }
     }//GEN-LAST:event_save1ActionPerformed
+
+    private void TextoNombreProblemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextoNombreProblemaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TextoNombreProblemaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
