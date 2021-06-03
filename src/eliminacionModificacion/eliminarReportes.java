@@ -142,7 +142,7 @@ public class eliminarReportes extends javax.swing.JFrame {
         });
         getContentPane().add(back1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 430, 50, 50));
 
-        save1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Buscar.png"))); // NOI18N
+        save1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Borrar.png"))); // NOI18N
         save1.setBorderPainted(false);
         save1.setContentAreaFilled(false);
         save1.addActionListener(new java.awt.event.ActionListener() {
@@ -174,6 +174,7 @@ public class eliminarReportes extends javax.swing.JFrame {
             idR = Integer.parseInt(jTextField5.getText());
         }catch(NumberFormatException  ex){
             JOptionPane.showMessageDialog(null, "Ingrese valores numéricos en los id");
+            return;
         }
         if(existeClaveR(idR)){
             try {

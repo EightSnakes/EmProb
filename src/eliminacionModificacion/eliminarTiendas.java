@@ -192,7 +192,7 @@ public class eliminarTiendas extends javax.swing.JFrame {
         });
         getContentPane().add(Back, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 400, 50, 50));
 
-        save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Buscar.png"))); // NOI18N
+        save.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Borrar.png"))); // NOI18N
         save.setBorderPainted(false);
         save.setContentAreaFilled(false);
         save.addActionListener(new java.awt.event.ActionListener() {
@@ -244,6 +244,7 @@ public class eliminarTiendas extends javax.swing.JFrame {
             idT = Integer.parseInt(ID_Tienda.getText());
         }catch(NumberFormatException  ex){
             JOptionPane.showMessageDialog(null, "Ingrese valores numéricos en los id");
+            return;
         }
         if(existeClaveT(idT)){
             try {

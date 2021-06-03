@@ -248,6 +248,7 @@ public class submenu extends javax.swing.JFrame {
             
         }catch(NumberFormatException  ex){
             JOptionPane.showMessageDialog(null, "Ingrese valores numéricos en los id");
+            return;
         }
         
         if (existeClaveT(idT)){

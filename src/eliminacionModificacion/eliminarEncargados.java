@@ -138,6 +138,7 @@ public class eliminarEncargados extends javax.swing.JFrame {
             iDE = Integer.parseInt(ID_Encargado.getText());
         }catch(NumberFormatException  ex){
             JOptionPane.showMessageDialog(null, "Ingrese valores numéricos en los id");
+            return;
         }
         if(existeClaveE()){
             try {

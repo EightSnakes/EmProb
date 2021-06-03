@@ -165,6 +165,7 @@ public class submenu_Encargados extends javax.swing.JFrame {
             idE = Integer.parseInt(ID_Encargado.getText());
         }catch(NumberFormatException  ex){
             JOptionPane.showMessageDialog(null, "Ingrese valores numéricos en los id");
+            return;
         }
         
             nombre = NombreEncar.getText();

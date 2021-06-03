@@ -156,6 +156,7 @@ public class submenu_Problemas extends javax.swing.JFrame {
             iDP = Integer.parseInt(IDProblema.getText());
         }catch(NumberFormatException  ex){
             JOptionPane.showMessageDialog(null, "Ingrese valores numéricos en los id");
+            return;
         }
         nombreP = NombreProblema.getText();
         desc = Descripcion.getText();

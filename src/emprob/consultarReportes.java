@@ -161,7 +161,7 @@ public class consultarReportes extends javax.swing.JFrame {
         // TODO add your handling code here:
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new menu2Encargados().setVisible(true);
+                new menu2Reportes().setVisible(true);
             }
         });
         this.dispose();
@@ -173,6 +173,7 @@ public class consultarReportes extends javax.swing.JFrame {
             idR = Integer.parseInt(jTextField5.getText());
         }catch(NumberFormatException  ex){
             JOptionPane.showMessageDialog(null, "Ingrese valores numéricos en los id");
+            return;
         }
         if(existeClaveR(idR)){
             try {
